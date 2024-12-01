@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Search</title>
+</head>
+<body>
+    <h1>Search Products</h1>
+    <form method="get" action="/api/products">
+        <label >Enter Product Name </label>
+        <input type="text"  name="param" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Master</th>
+                <th>Product Name</th>
+                <th>Price</th>
+				<th>Description</th>
+				<th>Rate</th>
+				<th>Review</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.productMaster}"></td>
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.price}"></td>
+				<td th:text="${product.description}"></td>
+				<td th:text="${product.rate}"></td>
+				<td th:text="${product.review}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
