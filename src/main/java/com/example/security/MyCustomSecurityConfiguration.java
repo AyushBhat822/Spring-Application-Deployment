@@ -15,11 +15,12 @@ public class MyCustomSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated()
-                )
+                .authorizeRequests()
+                 // Allow access to Prometheus
+                .requestMatchers("/webpage","/api/product").authenticated()
+                .anyRequest().permitAll()
+                .and()
                 .oauth2Login(withDefaults());
-//                .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
-                return http.build();
+        return http.build();
     }
 }
